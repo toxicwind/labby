@@ -8,8 +8,8 @@
   },
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "bunx vite",
+    "build": "bunx vite build",
     "preview": "vite preview"
   },
   "type": "module",

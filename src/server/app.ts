@@ -33,6 +33,7 @@ import { getJellyfinImage, type JellyfinConfig } from './integrations/jellyfin';
 import { getPlexImage, type PlexConfig } from './integrations/plex';
 import { INTEGRATIONS, type IntegrationType, integrationTypes } from './integrations/registry';
 import { hub } from './sse/hub';
+import agentsRouter from './agents/routes';
 import { refreshIntegration, startScheduler } from './sse/scheduler';
 
 const app = new Hono();
@@ -147,6 +148,8 @@ app.get('/api/favicon', async (c) => {
   if (!url) return c.json({ icon: null });
   return c.json(await resolveFavicon(url));
 });
+
+app.route('/api/agents', agentsRouter);
 
 app.get('/api/integrations/types', (c) => c.json(integrationTypes()));
 

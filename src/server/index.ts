@@ -2,6 +2,7 @@ import { app } from './app';
 import { loadConfig } from './config/loader';
 import { migrateLayoutToIntegrations } from './config/migrate-layout';
 import { initScheduler } from './sse/scheduler';
+import { loadAgents } from './agents/store';
 
 const PORT = Number(process.env.LABBY_PORT ?? 8080);
 
@@ -16,6 +17,9 @@ async function main() {
     console.warn(`Config warning: ${state.error}`);
   }
   initScheduler();
+
+  // Agent explorer: load the parquet snapshot (non-fatal if missing).
+  await loadAgents();
 
   console.log(`Labby listening on :${PORT}`);
   Bun.serve({

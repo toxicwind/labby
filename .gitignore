@@ -53,3 +53,7 @@ config/*.db
 
 # One-off scratch scripts
 patch.js
+
+# Agent explorer pipeline intermediates
+data/*.jsonl
+data/*.jsonl.gz

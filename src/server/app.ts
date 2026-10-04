@@ -4,6 +4,7 @@ import { type Context, Hono } from 'hono';
 import { compress } from 'hono/compress';
 import { streamSSE } from 'hono/streaming';
 import { z } from 'zod';
+import agentsRouter from './agents/routes';
 import { getConfig, getConfigState, reloadConfig, saveThemeSettings } from './config/loader';
 import {
   DashboardSchema,
@@ -33,7 +34,6 @@ import { getJellyfinImage, type JellyfinConfig } from './integrations/jellyfin';
 import { getPlexImage, type PlexConfig } from './integrations/plex';
 import { INTEGRATIONS, type IntegrationType, integrationTypes } from './integrations/registry';
 import { hub } from './sse/hub';
-import agentsRouter from './agents/routes';
 import { refreshIntegration, startScheduler } from './sse/scheduler';
 
 const app = new Hono();

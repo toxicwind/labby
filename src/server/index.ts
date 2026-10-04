@@ -1,8 +1,8 @@
+import { loadAgents } from './agents/store';
 import { app } from './app';
 import { loadConfig } from './config/loader';
 import { migrateLayoutToIntegrations } from './config/migrate-layout';
 import { initScheduler } from './sse/scheduler';
-import { loadAgents } from './agents/store';
 
 const PORT = Number(process.env.LABBY_PORT ?? 8080);
 

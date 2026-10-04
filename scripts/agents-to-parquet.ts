@@ -1,4 +1,5 @@
 #!/usr/bin/env bun
+
 /**
  * Convert the agent export (JSONL, one agent record per line) into a parquet
  * snapshot for the explorer to serve.
@@ -15,9 +16,9 @@
  *   ephemeral                                                  -> BOOLEAN
  */
 
-import { parquetWriteBuffer } from 'hyparquet-writer';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { parquetWriteBuffer } from 'hyparquet-writer';
 
 const root = path.resolve(import.meta.dir, '..');
 const inPath = process.argv[2] ?? path.join(root, 'data', 'agents.jsonl');

@@ -12,9 +12,9 @@
  * deps). Writer (pipeline side): hyparquet-writer.
  */
 
-import { parquetReadObjects } from 'hyparquet';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { parquetReadObjects } from 'hyparquet';
 
 export type AgentRecord = {
   agent_id: string;
@@ -66,7 +66,8 @@ function coerce(row: Record<string, unknown>): AgentRecord {
   // The pipeline writes null agent_type / parent_agent_id as '' (parquet
   // STRING has no null in the writer's simple path); map it back here.
   const at = row.agent_type == null || row.agent_type === '' ? null : String(row.agent_type);
-  const pa = row.parent_agent_id == null || row.parent_agent_id === '' ? null : String(row.parent_agent_id);
+  const pa =
+    row.parent_agent_id == null || row.parent_agent_id === '' ? null : String(row.parent_agent_id);
   return {
     agent_id: String(row.agent_id ?? ''),
     model: String(row.model ?? ''),
@@ -176,7 +177,16 @@ export function agentStats(): AgentStats {
     if (firstSeen === null || r.created_at < firstSeen) firstSeen = r.created_at;
     if (lastSeen === null || r.created_at > lastSeen) lastSeen = r.created_at;
   }
-  return { total: rows.length, byStatus, byKind, byModel, byType, firstSeen, lastSeen, exportedAt: loadedAt };
+  return {
+    total: rows.length,
+    byStatus,
+    byKind,
+    byModel,
+    byType,
+    firstSeen,
+    lastSeen,
+    exportedAt: loadedAt,
+  };
 }
 
 export function agentTimeline(): TimelineBucket[] {

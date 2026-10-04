@@ -13,7 +13,9 @@
 
 import { Hono } from 'hono';
 import { z } from 'zod';
+import { hub } from '../sse/hub';
 import {
+  type AgentFilters,
   agentFilterMeta,
   agentStats,
   agentStoreStatus,
@@ -22,9 +24,7 @@ import {
   getChildren,
   listAgents,
   loadAgents,
-  type AgentFilters,
 } from './store';
-import { hub } from '../sse/hub';
 
 const app = new Hono();
 

@@ -77,9 +77,7 @@ export function fetchAgents(
   pageSize: number,
   sort: 'newest' | 'oldest' = 'newest',
 ): Promise<AgentListResult> {
-  return get<AgentListResult>(
-    '/' + qs({ ...filters, page, pageSize, sort }),
-  );
+  return get<AgentListResult>(`/${qs({ ...filters, page, pageSize, sort })}`);
 }
 
 export const fetchStats = () => get<AgentStats>('/stats');
